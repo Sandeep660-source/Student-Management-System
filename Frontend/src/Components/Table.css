@@ -1,0 +1,27 @@
+/* 1. Centers the table on the page */
+.table-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+/* 2. Style the table structure */
+.student-table {
+  border-collapse: collapse; /* Makes single-line borders */
+  width: 60%; 
+  font-family: sans-serif;
+}
+
+/* 3. Style headers and cells (Borders + Centering) */
+.student-table th, 
+.student-table td {
+  border: 2px solid #000; /* Visible black border */
+  text-align: center;     /* Centers text in all cells */
+  padding: 10px;
+}
+
+/* 4. Optional: Header background to make it look professional */
+.student-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
