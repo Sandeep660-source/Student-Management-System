@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import {Routes,Route} from "react-router-dom"
 import Table from './Components/Table'
+import CreateStudent from './Components/CreateStudent'
+import EditStudent from './Components/EditStudent'
 
 
 import './App.css'
@@ -11,7 +14,13 @@ function App() {
 
   return (
     <>
-      <Table/>
+    <Routes>
+      <Route path="/" element={<Table />} />
+      <Route path="/create-student" element={<CreateStudent/>} />
+      <Route path="/edit-student" element={<EditStudent/>}/>
+      
+    </Routes>
+      
     </>
   )
 }
