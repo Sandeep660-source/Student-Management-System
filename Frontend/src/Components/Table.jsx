@@ -1,8 +1,14 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import "./Table.css"
+import{getAllStudents} from "../services/api";
 
 
 const Table = () => {
+
+useEffect(() =>{
+    getAllStudents();
+  },[]);
+  
   return (
     <div>
          
