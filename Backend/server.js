@@ -19,6 +19,7 @@ app.post("/api/student", async (req, res) => {
 
     res.status(200).json({
       success: true,
+      message:"Successfully Created Student",
       student: student,
     });
   } catch (error) {
@@ -91,6 +92,73 @@ app.delete("/api/student/:id",async (req,res)=>{
   })
 }
 })
+
+
+app.get("/api/student/:id",async (req,res)=>{
+  try{
+    const id = req.params.id
+    console.log("id")
+    const student = await Student.findById(id);
+
+    if(!student){
+      res.status(404).json({
+        success:false,
+        message:"Student not found"
+
+      })
+    }
+    res.status(200).json({
+      success:true,
+      message:"Student fetched Successfully",
+      student: student
+    })
+
+  }
+  catch(error){
+    console.log("error fetching Students",error)
+  }
+})
+
+
+app.put("/api/sttudent/:id",async (req,res)=>{
+  try{
+    const id = req.params.id;
+    const name = req.body.name;
+    const age = req.body.age;
+    const updateStudent = await Student.findByIdAndUpdate(id,{name,age},{new: true})
+    if(!updateStudent){
+      res.status(404).json({
+        success : false,
+        message : "Student not Updated"
+      })
+    }
+    res.status(200).json({
+      success : true,
+      message : "Student Updated Succesfully",
+      student : updateStudent
+    })
+
+  }
+  catch(error){
+    console.log("Error Updating student",error)
+  }
+})
+
+
+app.delete("/api/student/:id", async (req, res) => {
+try {
+const deletedStudent = await Student.findByIdAndDelete(req.params.id);
+if (!deletedStudent) {
+return res.status(404).json({ message: "Student not found" });
+}
+res.status(200).json({
+message: "Student deleted successfully",
+deletedStudent
+});
+} catch (error) {
+res.status(500).json({ message: "Error deleting student", error });
+}
+});
 
 app.listen(PORT, () => {
   console.log("Application is running on Port", PORT);
