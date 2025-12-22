@@ -9,12 +9,9 @@ export const getAllStudents = async()=>{
         console.log("response",response);
         console.log("response.data",response.data);
         console.log("response.data.students",response.data.students);
+        const studentsArray = response.data.students; 
 
-        const studentsArray = response.data.students
-        for(let i=0;i<studentsArray.length;i++){
-            console.log("Student Name",studentsArray[i].name);
-            console.log("Student Age",studentsArray[i].age)
-        }
+       return studentsArray;
 
     }
     catch(error){
@@ -24,3 +21,53 @@ export const getAllStudents = async()=>{
 
 
 }
+
+
+//update student 
+export const getStudentById = async (id)=>{
+    try{
+        const response = await API.get(`/student/${id}`);
+        return response.data.student
+    }
+    catch(error){
+        console.log("Failed to get student",error);
+    }
+}
+
+export const addStudent = async ({name,age}) => {
+    try{
+        console.log("name", name)
+        const response = await API.post("/student",{name,age});
+        return response.data.messege;
+
+    }
+
+    catch(error){
+        return "Error Creating Student",
+        console.log("Error creating the student", error);
+    }
+}
+export const updateStudent = async (id,name,age)=>{
+    try{
+        const response = await API.put(`/student/${id}`,{name,age})
+        return response.data.message
+
+    }
+    catch(error){
+        console.log("Error fatching students",error)
+    }
+    }
+export const deleteStudent = async (id,name,age)=>{
+    try{
+        const response = await API.delete(`/student/${id}`)
+        return response.data.message
+    }
+    catch(error){
+        console.log("Error deleting Student",error)
+    }
+}
+
+     
+       
+
+    
